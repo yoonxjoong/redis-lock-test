@@ -1,8 +1,7 @@
-# Redis의 공식 이미지를 기반으로 합니다.
-FROM redis:latest
+FROM eclipse-temurin:17-jdk
 
-# Redis의 기본 포트인 6379를 노출합니다.
-EXPOSE 6378
+ARG JAR_FILE=build/libs/redis-lock-test-0.0.1-SNAPSHOT.jar
+COPY ${JAR_FILE} app.jar
 
-# Redis 서버를 실행합니다.
-CMD ["redis-server"]
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "/app.jar"]
